@@ -9277,7 +9277,7 @@ figcaption {
           stroke-width: 2;
           position: relative;
           z-index: 2;
-          width: 20px; }
+          width: 28px; }
         .slide .social-share-inner-left .social-share li a:hover {
           transform: translateY(-3px); }
           .slide .social-share-inner-left .social-share li a:hover svg {
@@ -9310,7 +9310,7 @@ figcaption {
       background: var(--background-color-1);
       box-shadow: var(--shadow-1); }
       .slide .skill-share-inner .skill-share li img {
-        max-height: 23px;
+        max-height: 30px;
         width: auto; }
   .slide .thumbnail {
     position: relative;
@@ -10791,7 +10791,8 @@ div#featured-project-carousel {
     border-radius: 10px;
     padding: 3px;
     background: #212428;
-    box-shadow: inset 8px 8px 16px #00000075,  inset -8px -8px 16px #383e4575; }
+    box-shadow: inset 8px 8px 16px #00000075, 
+ inset -8px -8px 16px #383e4575; }
     .progress-charts .progress .progress-bar {
       overflow: visible;
       position: relative;
