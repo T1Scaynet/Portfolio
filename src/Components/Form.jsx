@@ -1,8 +1,6 @@
 import { useState } from "react";
-// import sgMail from "@sendgrid/mail";
 import axios from "axios";
-
-// sgMail.setApiKey(import.meta.env.PUBLIC_SENDGRID_API_KEY);
+import { Toaster, toast } from "sonner";
 
 export const Form = () => {
   const [name, setName] = useState("");
@@ -10,7 +8,6 @@ export const Form = () => {
   const [phone, setPhone] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
@@ -39,41 +36,33 @@ export const Form = () => {
       return;
     }
 
-    const msg = {
-      to: email, // correo electrónico del destinatario
-      from: "gustavochura94@gmail.com", // correo electrónico del remitente
-      subject: subject, // asunto del correo electrónico
-      html: `
-        <p>Name: ${name}</p>
-        <p>Email: ${email}</p>
-        <p>Phone: ${phone}</p>
-        <p>Message: ${message}</p>
-      `, // contenido del correo electrónico
-    };
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("subject", subject);
+    formData.append("message", message);
+
 
     try {
-      await axios.post('https://api.sendgrid.com/v3/mail/send', msg, {
-        headers: {
-          'Authorization': `Bearer ${import.meta.env.PUBLIC_SENDGRID_API_KEY}`,
-          'Content-Type': 'application/json'
-        }
-      });
-      setSuccess(true);
+      await axios.post(import.meta.env.PUBLIC_FORMSPREE_API_KEY, formData);
       setName("");
       setEmail("");
       setPhone("");
       setMessage("");
+      setSubject("");
       setErrors([]);
+      toast.success('Correo electrónico enviado con éxito!')
     } catch (error) {
       console.error(error);
-      setErrors(["Failed to send email. Please try again later."]);
+      toast.error('No se pudo enviar el correo electrónico. Por favor, inténtelo de nuevo más tarde.')
     }
   };
 
   return (
     <div data-aos-delay="600" className="col-lg-7 contact-input">
       <div className="contact-form-wrapper">
-        {success && <p>Email sent successfully!</p>}
+        <Toaster/>
         {errors.length > 0 && (
           <ul>
             {errors.map((error) => (
