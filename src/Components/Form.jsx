@@ -1,7 +1,8 @@
 import { useState } from "react";
-import sgMail from "@sendgrid/mail";
+// import sgMail from "@sendgrid/mail";
+import axios from "axios";
 
-sgMail.setApiKey(import.meta.env.PUBLIC_SENDGRID_API_KEY);
+// sgMail.setApiKey(import.meta.env.PUBLIC_SENDGRID_API_KEY);
 
 export const Form = () => {
   const [name, setName] = useState("");
@@ -51,7 +52,12 @@ export const Form = () => {
     };
 
     try {
-      await sgMail.send(msg);
+      await axios.post('https://api.sendgrid.com/v3/mail/send', msg, {
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.PUBLIC_SENDGRID_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
       setSuccess(true);
       setName("");
       setEmail("");
