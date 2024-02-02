@@ -51,11 +51,11 @@ export const NavItems: INavItems[] = [
 ];
 
 export const ExperienceJob: IExperience[] = [
-  {
-    title: "Fer Palacios",
-    company: "Carpincho (Ene. 2023 - Abr. 2023)",
-    description: "Trabaje en el frontend y backend",
-  }
+  // {
+  //   title: "Fer Palacios",
+  //   company: "Carpincho (Ene. 2023 - Abr. 2023)",
+  //   description: "Trabaje en el frontend y backend",
+  // }
 ];
 
 export const ExperienceAcademic: IExperience[] = [
